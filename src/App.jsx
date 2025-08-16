@@ -22,10 +22,6 @@ const App = () => {
         </div>
       </div>
       <div className="chat-footer">
-        <form action="#" className="chat-form">
-          <input type="text" placeholder="Message..." className="message-input" required/>
-          <button className="material-symbols-outlined">arrow_upward</button>
-        </form>
       </div>
     </div>
   </div>;
