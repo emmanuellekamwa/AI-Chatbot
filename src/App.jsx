@@ -1,4 +1,5 @@
 import ChatbotIcon from "./components/ChatbotIcon";
+import ChatForm from "./components/ChatForm";
 
 const App = () => {
   return <div className="container">
@@ -22,6 +23,7 @@ const App = () => {
         </div>
       </div>
       <div className="chat-footer">
+        <ChatForm />
       </div>
     </div>
   </div>;
