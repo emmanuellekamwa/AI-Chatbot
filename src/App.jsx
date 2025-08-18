@@ -29,7 +29,7 @@ const App = () => {
         <ChatForm setChatHistory={setChatHistory} />
       </div>
     </div>
-  </div>;
-}
+  </div>
+};
  
 export default App;
