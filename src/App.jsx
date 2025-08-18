@@ -21,9 +21,9 @@ const App = () => {
           Hey there 👋 <br /> How can I help you today?
         </p>
         </div>
-        <div className="message user-message">
-        <p className="message-text">Hello hello.</p>
-        </div>
+        {chatHistory.map((chat, index) => (
+          <ChatMessage key={index} chat={chat}/>
+        ))}
       </div>
       <div className="chat-footer">
         <ChatForm setChatHistory={setChatHistory} />
