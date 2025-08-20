@@ -20,7 +20,7 @@ const App = () => {
       const data = await response.json();
       if(!response.ok) throw new Error(data.error.message || "Something went wrong!");
 
-      console.log();
+      console.log(data);
     } catch (error) {
 
     }
