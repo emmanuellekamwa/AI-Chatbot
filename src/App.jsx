@@ -5,11 +5,12 @@ import ChatMessage from "./components/ChatMessage";
 
 const App = () => {
   const [chatHistory, setChatHistory] = useState([]);
+  const [showChatbot, setShowChatbot] = useState(false);
   const chatBodyRef = useRef();
 
   const generateBotResponse = async (history) => {
-    const updateHistory = (text) => {
-      setChatHistory(prev => [...prev.filter(msg => msg.text !== "Thinking..."), {role: "model", text}]);
+    const updateHistory = (text, isError = false) => {
+      setChatHistory(prev => [...prev.filter(msg => msg.text !== "Thinking..."), {role: "model", text, isError}]);
     };
 
 
@@ -29,7 +30,7 @@ const App = () => {
       const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
       updateHistory(apiResponseText);
     } catch (error) {
-      console.log(error);
+      updateHistory(error.message, true);
     }
   };
 
@@ -37,14 +38,18 @@ const App = () => {
     chatBodyRef.current.scrollTo({top: chatBodyRef.current.scrollHeight, behaviour: "smooth"});
   }, [chatHistory]);
 
-  return <div className="container">
+  return <div className={`container ${showChatbot ? "show-chatbot" : ""}`}>
+    <button onClick={() => setShowChatbot(prev => !prev)}id="chatbot-toggler">
+      <span className="material-symbols-outlined">mode_comment</span>
+      <span className="material-symbols-outlined">Close</span>
+    </button>
     <div className="chatbot-popup">
       <div className="chat-header">
         <div className="header-info">
           <ChatbotIcon />
           <h2 className="logo-text">Chatbot</h2>
         </div>
-        <button className="material-symbols-outlined">keyboard_arrow_down</button>
+        <button onClick={() => setShowChatbot(prev => !prev)}className="material-symbols-outlined">keyboard_arrow_down</button>
       </div>
       <div ref={chatBodyRef} className="chat-body">
         <div className="message bot-message">
